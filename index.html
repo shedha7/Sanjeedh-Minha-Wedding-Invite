@@ -1,4 +1,4 @@
-
+```
 <!DOCTYPE html>
 <html lang="en">
 
@@ -15,6 +15,9 @@
             name="theme-color"
             content="#35171c"
     >
+
+    <!-- Prevent Safari from auto-detecting phone numbers as blue links -->
+    <meta name="format-detection" content="telephone=no">
 
     <title>Sanjeedh & Minha</title>
 
@@ -678,8 +681,19 @@
     font-size: 1rem;
     font-weight: 600;
     letter-spacing: 1.5px;
-    color: #efcf98;
-    text-decoration: none;
+    color: #efcf98 !important;
+    -webkit-text-fill-color: #efcf98;
+    text-decoration: none !important;
+    -webkit-text-decoration: none;
+}
+
+.compliments .phone-number:visited,
+.compliments .phone-number:hover,
+.compliments .phone-number:active,
+.compliments .phone-number:focus {
+    color: #efcf98 !important;
+    -webkit-text-fill-color: #efcf98;
+    text-decoration: none !important;
 }
 
 
@@ -706,27 +720,31 @@
 
 
         /* =========================================================
-           NIKAH IMAGE PAGE
+           NIKAH IMAGE PAGE — FULL SCREEN
         ========================================================= */
 
-         .nikah-page {
-            position: relative;
-            width: 100%;
-            min-height: 100svh;
-            height: 100svh;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            overflow: hidden;
+        .nikah-page {
+            position: relative !important;
+            width: 100vw !important;
+            height: 100svh !important;
+            min-height: 100vh !important;
+            margin: 0 !important;
+            padding: 0 !important;
+            overflow: hidden !important;
+            display: block !important;
             background: #f4e5d4;
         }
 
         .nikah-page img {
-            width: 100%;
-            height: 100%;
-            display: block;
-            object-fit: contain;
-            object-position: center;
+            position: absolute !important;
+            inset: 0 !important;
+            width: 100% !important;
+            height: 100% !important;
+            margin: 0 !important;
+            padding: 0 !important;
+            display: block !important;
+            object-fit: cover !important;
+            object-position: center center !important;
         }
 
 
@@ -737,23 +755,37 @@
         .nikah-pixie-dust {
             position: absolute;
             inset: 0;
-            z-index: 3;
+            z-index: 5;
             pointer-events: none;
             overflow: hidden;
         }
 
         .nikah-pixie {
             position: absolute;
-            top: -12px;
+            top: -18px;
             left: var(--left);
             width: var(--size);
             height: var(--size);
             border-radius: 50%;
             background: var(--color);
-            box-shadow: 0 0 5px var(--color), 0 0 10px rgba(239, 207, 152, .28);
-            opacity: var(--opacity);
+            box-shadow:
+                0 0 4px var(--color),
+                0 0 9px var(--color),
+                0 0 15px rgba(239, 207, 152, .42);
+            opacity: 0;
             animation: nikahPixieFall var(--duration) linear var(--delay) infinite;
-            transform: translate3d(0, -20px, 0);
+            transform: translate3d(0, -24px, 0);
+            will-change: transform, opacity;
+        }
+
+        .nikah-pixie::before {
+            content: '';
+            position: absolute;
+            inset: -2px;
+            background: var(--color);
+            opacity: .55;
+            clip-path: polygon(50% 0%, 62% 38%, 100% 50%, 62% 62%, 50% 100%, 38% 62%, 0% 50%, 38% 38%);
+            filter: drop-shadow(0 0 3px var(--color));
         }
 
         .nikah-pixie::after {
@@ -764,30 +796,30 @@
             left: 50%;
             top: 50%;
             border-radius: 50%;
-            background: rgba(255, 244, 215, .9);
+            background: rgba(255, 248, 228, .98);
             transform: translate(-50%, -50%);
         }
 
         @keyframes nikahPixieFall {
             0% {
-                transform: translate3d(0, -20px, 0) rotate(0deg);
+                transform: translate3d(0, -24px, 0) rotate(0deg);
                 opacity: 0;
             }
 
-            10% {
+            8% {
                 opacity: var(--opacity);
             }
 
             50% {
-                transform: translate3d(var(--drift), 50vh, 0) rotate(180deg);
+                transform: translate3d(var(--drift), 52vh, 0) rotate(180deg);
             }
 
-            90% {
-                opacity: calc(var(--opacity) * .72);
+            88% {
+                opacity: calc(var(--opacity) * .82);
             }
 
             100% {
-                transform: translate3d(calc(var(--drift) * -0.55), 110vh, 0) rotate(360deg);
+                transform: translate3d(calc(var(--drift) * -0.55), 112vh, 0) rotate(360deg);
                 opacity: 0;
             }
         }
@@ -795,7 +827,7 @@
         @media (prefers-reduced-motion: reduce) {
             .nikah-pixie {
                 animation: none;
-                opacity: .55;
+                opacity: .7;
             }
         }
 
@@ -3491,7 +3523,7 @@
             "#f4dfb2"
         ];
 
-        const pixieCount = 42;
+        const pixieCount = 78;
 
         for (let i = 0; i < pixieCount; i++) {
 
@@ -3500,22 +3532,22 @@
             pixie.className = "nikah-pixie";
 
             const size =
-                (Math.random() * 2.4 + 1.2).toFixed(2) + "px";
+                (Math.random() * 2.6 + 1.5).toFixed(2) + "px";
 
             const left =
                 (Math.random() * 100).toFixed(2) + "%";
 
             const duration =
-                (Math.random() * 7 + 8).toFixed(2) + "s";
+                (Math.random() * 5 + 6).toFixed(2) + "s";
 
             const delay =
-                (-Math.random() * 12).toFixed(2) + "s";
+                (-Math.random() * 10).toFixed(2) + "s";
 
             const drift =
-                ((Math.random() * 70) - 35).toFixed(1) + "px";
+                ((Math.random() * 110) - 55).toFixed(1) + "px";
 
             const opacity =
-                (Math.random() * 0.38 + 0.32).toFixed(2);
+                (Math.random() * 0.30 + 0.52).toFixed(2);
 
             const color =
                 pixieColors[
@@ -3541,3 +3573,4 @@
 </body>
 
 </html>
+```
