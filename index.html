@@ -561,6 +561,74 @@
             background-attachment: fixed;
 
         }
+        .cream-scroll-hint {
+    position: absolute;
+
+    left: 50%;
+    bottom: 22px;
+
+    transform: translateX(-50%);
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    z-index: 20;
+
+    color: #8f756d;
+
+    pointer-events: none;
+}
+
+
+/* SCROLL */
+
+.cream-scroll-hint span {
+    font-family: 'Montserrat', sans-serif;
+
+    font-size: .5rem;
+
+    letter-spacing: 3px;
+
+    text-transform: uppercase;
+
+    opacity: .65;
+}
+
+
+/* ARROW */
+
+.cream-scroll-arrow {
+    margin-top: 5px;
+
+    font-family: Georgia, serif;
+
+    font-size: 1.25rem;
+
+    line-height: 1;
+
+    opacity: .7;
+
+    animation: creamScrollBounce 1.8s ease-in-out infinite;
+}
+
+
+/* GENTLE BOUNCE */
+
+@keyframes creamScrollBounce {
+
+    0%,
+    100% {
+        transform: translateY(0);
+        opacity: .5;
+    }
+
+    50% {
+        transform: translateY(6px);
+        opacity: .95;
+    }
+
+}
 
 
         .cream-content {
@@ -569,6 +637,78 @@
                 min(900px, 92vw);
 
         }
+        /* =========================================================
+   SCROLL HINT — FIRST CREAM PAGE
+   ========================================================= */
+
+.scroll-hint {
+    position: absolute;
+
+    left: 50%;
+    bottom: 24px;
+
+    transform: translateX(-50%);
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    color: #8f756d;
+
+    pointer-events: none;
+
+    z-index: 10;
+}
+
+
+/* SCROLL TEXT */
+
+.scroll-hint span {
+    font-family: 'Montserrat', sans-serif;
+
+    font-size: .5rem;
+
+    letter-spacing: 3px;
+
+    text-transform: uppercase;
+
+    opacity: .7;
+}
+
+
+/* DOWN ARROW */
+
+.scroll-arrow {
+    margin-top: 5px;
+
+    font-family: Georgia, serif;
+
+    font-size: 1.25rem;
+
+    line-height: 1;
+
+    opacity: .75;
+
+    animation: scrollBounce 1.8s ease-in-out infinite;
+}
+
+
+/* GENTLE UP/DOWN MOTION */
+
+@keyframes scrollBounce {
+
+    0%,
+    100% {
+        transform: translateY(0);
+        opacity: .55;
+    }
+
+    50% {
+        transform: translateY(6px);
+        opacity: 1;
+    }
+
+}
 
 
         .section-small {
@@ -751,6 +891,272 @@
             object-fit: cover !important;
             object-position: center center !important;
         }
+ /* =====================================================
+   NIKAH LOCATION CARD
+   ===================================================== */
+
+.nikah-map {
+    position: absolute !important;
+
+    left: 50% !important;
+    bottom: 5% !important;
+
+    transform: translateX(-50%) !important;
+
+    width: 78% !important;
+    height: 23% !important;
+
+    background: #f5e6d2 !important;
+
+    border: 1px solid rgba(112, 73, 42, 0.45) !important;
+
+    border-radius: 0 !important;
+
+    overflow: hidden !important;
+
+    z-index: 20 !important;
+
+    box-sizing: border-box !important;
+
+    color: #5b2b2d !important;
+}
+
+
+/* =====================================================
+   MAP / ROAD AREA
+   ===================================================== */
+
+.nikah-map-pattern {
+    position: relative !important;
+
+    display: block !important;
+
+    width: 100% !important;
+    height: 58% !important;
+
+    overflow: hidden !important;
+
+    background: #f5e6d2 !important;
+}
+
+
+/* =====================================================
+   ABSTRACT MAP ROADS
+   ===================================================== */
+
+.map-road {
+    position: absolute !important;
+
+    display: block !important;
+
+    height: 1px !important;
+
+    background: rgba(117, 79, 49, 0.38) !important;
+
+    transform-origin: center !important;
+
+    pointer-events: none !important;
+}
+
+
+/* diagonal roads */
+
+.road-1 {
+    width: 120% !important;
+    left: -10% !important;
+    top: 22% !important;
+
+    transform: rotate(12deg) !important;
+}
+
+.road-2 {
+    width: 115% !important;
+    left: -8% !important;
+    top: 70% !important;
+
+    transform: rotate(-13deg) !important;
+}
+
+.road-3 {
+    width: 85% !important;
+    left: 5% !important;
+    top: 48% !important;
+
+    transform: rotate(-28deg) !important;
+}
+
+.road-4 {
+    width: 100% !important;
+    left: 15% !important;
+    top: 10% !important;
+
+    transform: rotate(32deg) !important;
+}
+
+.road-5 {
+    width: 75% !important;
+    left: -5% !important;
+    top: 87% !important;
+
+    transform: rotate(24deg) !important;
+}
+
+.road-6 {
+    width: 65% !important;
+    left: 45% !important;
+    top: 65% !important;
+
+    transform: rotate(-35deg) !important;
+}
+
+
+/* =====================================================
+   LOCATION PIN
+   ===================================================== */
+
+.nikah-map-pin {
+    position: absolute !important;
+
+    left: 50% !important;
+    top: 50% !important;
+
+    width: 16px !important;
+    height: 16px !important;
+
+    transform: translate(-50%, -50%) rotate(-45deg) !important;
+
+    background: #8c2638 !important;
+
+    border-radius: 50% 50% 50% 0 !important;
+
+    box-shadow: 0 2px 5px rgba(70, 35, 20, 0.18) !important;
+
+    z-index: 5 !important;
+}
+
+
+/* pin center */
+
+.nikah-map-pin span {
+    position: absolute !important;
+
+    display: block !important;
+
+    width: 5px !important;
+    height: 5px !important;
+
+    left: 50% !important;
+    top: 50% !important;
+
+    transform: translate(-50%, -50%) !important;
+
+    background: #f5e6d2 !important;
+
+    border-radius: 50% !important;
+}
+
+
+/* =====================================================
+   BOTTOM INFORMATION AREA
+   ===================================================== */
+
+.nikah-map-info {
+    position: relative !important;
+
+    display: flex !important;
+
+    align-items: center !important;
+    justify-content: space-between !important;
+
+    width: 100% !important;
+    height: 42% !important;
+
+    box-sizing: border-box !important;
+
+    padding: 10px 18px 10px 18px !important;
+
+    background: #f5e6d2 !important;
+
+    border-top: 1px solid rgba(112, 73, 42, 0.35) !important;
+}
+
+
+/* =====================================================
+   LOCATION NAME
+   ===================================================== */
+
+.nikah-location-name {
+    font-family: Georgia, "Times New Roman", serif !important;
+
+    font-size: 14px !important;
+
+    line-height: 1.25 !important;
+
+    color: #5d2930 !important;
+
+    letter-spacing: 0.2px !important;
+
+    white-space: nowrap !important;
+}
+
+
+/* =====================================================
+   LOCATION
+   ===================================================== */
+
+.nikah-location-place {
+    margin-top: 3px !important;
+
+    font-family: Arial, sans-serif !important;
+
+    font-size: 8px !important;
+
+    line-height: 1 !important;
+
+    letter-spacing: 2px !important;
+
+    color: #8a674a !important;
+}
+
+
+/* =====================================================
+   DIRECTIONS LINK
+   ===================================================== */
+
+.nikah-directions {
+    display: flex !important;
+
+    align-items: center !important;
+
+    gap: 8px !important;
+
+    color: #8c2638 !important;
+
+    text-decoration: none !important;
+
+    font-family: Arial, sans-serif !important;
+
+    font-size: 8px !important;
+
+    letter-spacing: 2px !important;
+
+    white-space: nowrap !important;
+
+    padding-bottom: 5px !important;
+
+    border-bottom: 1px solid rgba(140, 38, 56, 0.5) !important;
+}
+
+
+/* arrow */
+
+.nikah-directions span {
+    font-size: 15px !important;
+
+    line-height: 8px !important;
+
+    letter-spacing: 0 !important;
+}
 
 
         /* =========================================================
@@ -2117,6 +2523,12 @@
             </div>
 
 
+
+        </div>
+        <!-- SCROLL HINT -->
+        <div class="cream-scroll-hint">
+            <span>SCROLL</span>
+            <div class="cream-scroll-arrow">↓</div>
         </div>
 
 
@@ -2258,10 +2670,12 @@
                 </div>
 
 
+
             </div>
 
 
         </div>
+
 
 
     </section>
@@ -2271,6 +2685,8 @@
          NIKAH IMAGE PAGE
     ===================================================== -->
 
+    <!-- whatever section comes BEFORE Nikah -->
+
     <section
             class="scene nikah-page">
 
@@ -2278,13 +2694,55 @@
                 src="images/nikah-page.jpg"
                 alt="Nikah wedding invitation"
         >
+        <!-- STYLIZED LOCATION MAP -->
+        <div class="nikah-map">
 
+            <div class="nikah-map-pattern">
+
+                <span class="map-road road-1"></span>
+                <span class="map-road road-2"></span>
+                <span class="map-road road-3"></span>
+                <span class="map-road road-4"></span>
+                <span class="map-road road-5"></span>
+                <span class="map-road road-6"></span>
+
+                <div class="nikah-map-pin">
+                    <span></span>
+                </div>
+
+            </div>
+
+            <div class="nikah-map-info">
+
+                <div>
+                    <div class="nikah-location-name">
+                        Chaliyar Auditorium
+                    </div>
+
+                    <div class="nikah-location-place">
+                        EDAVANNAPARA
+                    </div>
+                </div>
+
+                <a
+                        href="https://share.google/yIjY2RqxxveIt3Exx"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        class="nikah-directions">
+                    DIRECTIONS <span>⟶</span>
+                </a>
+
+            </div>
+
+        </div>
         <div
                 class="nikah-pixie-dust"
-                aria-hidden="true"
-        ></div>
+                aria-hidden="true">
+        </div>
 
     </section>
+
+    <!-- whatever section comes AFTER Nikah -->
 
 
     <!-- =====================================================
