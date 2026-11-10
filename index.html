@@ -1,4 +1,3 @@
-```
 <!DOCTYPE html>
 <html lang="en">
 
@@ -4049,8 +4048,115 @@
 </script>
 
 
+
+<script>
+    /* AUTO SCROLL — independent of all existing invitation functionality */
+    (function () {
+        "use strict";
+
+        const SPEED = 32;            // pixels per second
+        const RESUME_AFTER = 4000;   // milliseconds after manual interaction
+        const OPENING_DELAY = 2200;  // let the original cover animation finish
+
+        let enabled = false;
+        let paused = false;
+        let frame = 0;
+        let lastTime = 0;
+        let targetY = 0;
+        let resumeTimeout = 0;
+        let originalScrollBehavior = "";
+
+        function cancelMotion() {
+            if (frame) cancelAnimationFrame(frame);
+            frame = 0;
+            lastTime = 0;
+            document.documentElement.style.scrollBehavior = originalScrollBehavior;
+        }
+
+        function step(time) {
+            frame = 0;
+            if (!enabled || paused || document.hidden) return;
+
+            const maxY = Math.max(0,
+                document.documentElement.scrollHeight - window.innerHeight);
+
+            if (window.scrollY >= maxY - 1) {
+                cancelMotion();
+                return;
+            }
+
+            if (!lastTime) lastTime = time;
+            const dt = Math.min((time - lastTime) / 1000, 0.1);
+            lastTime = time;
+
+            // Use an absolute position and retain fractional progress.
+            // This avoids the sub-pixel scrollBy rounding issue.
+            targetY = Math.max(targetY, window.scrollY);
+            targetY = Math.min(maxY, targetY + SPEED * dt);
+
+            // The page's existing CSS uses smooth scrolling; temporarily
+            // override it so each animation frame moves immediately.
+            document.documentElement.style.scrollBehavior = "auto";
+            window.scrollTo(0, targetY);
+
+            frame = requestAnimationFrame(step);
+        }
+
+        function start() {
+            if (!enabled || paused || document.hidden || frame) return;
+            if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+            targetY = window.scrollY;
+            lastTime = 0;
+            frame = requestAnimationFrame(step);
+        }
+
+        function pause() {
+            if (!enabled) return;
+            paused = true;
+            clearTimeout(resumeTimeout);
+            cancelMotion();
+            resumeTimeout = setTimeout(function () {
+                paused = false;
+                targetY = window.scrollY;
+                start();
+            }, RESUME_AFTER);
+        }
+
+        function activate() {
+            if (enabled) return;
+            enabled = true;
+            originalScrollBehavior = document.documentElement.style.scrollBehavior;
+            setTimeout(start, OPENING_DELAY);
+        }
+
+        // Preserve native mouse, touch, keyboard and scrollbar navigation.
+        window.addEventListener("wheel", pause, { passive: true });
+        window.addEventListener("touchstart", pause, { passive: true });
+        window.addEventListener("touchmove", pause, { passive: true });
+        window.addEventListener("pointerdown", pause, { passive: true });
+        window.addEventListener("keydown", function (e) {
+            if (["ArrowUp", "ArrowDown", "PageUp", "PageDown",
+                 "Home", "End", " "].includes(e.key)) pause();
+        });
+
+        document.addEventListener("visibilitychange", function () {
+            if (document.hidden) cancelMotion();
+            else start();
+        });
+
+        // Observe the class already set by the original openInvitation().
+        const observer = new MutationObserver(function () {
+            if (document.body.classList.contains("invitation-opened")) activate();
+        });
+        observer.observe(document.body, {
+            attributes: true,
+            attributeFilter: ["class"]
+        });
+
+        if (document.body.classList.contains("invitation-opened")) activate();
+    })();
+</script>
+
 </body>
 
 </html>
-```
-<!-- GitHub Pages rebuild -->
